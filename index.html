@@ -30,10 +30,29 @@
             <h2 id= 'question'> 
                 Questions go here
             </h2>
-            <button class= 'btn' id= 'btn1'> Button 1 </button>
-            <button class= 'btn' id= 'btn2'> Button 2 </button>
-            <button class= 'btn' id= 'btn3'> Button 3 </button>
-            <button class= 'btn' id= 'btn4'> Button 4 </button>
+            <ul id= 'btnList'>
+            <li><button class= 'btn btnAns btn-secondary' id= 'btn1'> Button 1 </button></li>
+            <li><button class= 'btn btnAns btn-secondary' id= 'btn2'> Button 2 </button></li>
+            <li><button class= 'btn btnAns btn-secondary' id= 'btn3'> Button 3 </button></li>
+            <li><button class= 'btn btnAns btn-secondary' id= 'btn4'> Button 4 </button></li>
+            </ul>
+        </div>
+        <div id= 'scoreInput' style= 'display: none'>
+            <h2>Submit your Name and Score</h2>
+            <label for= "name">Name</label>
+            <input type= "text" id="name">
+            <p id= 'finalScore'>Final Score Here </p>
+            <button class= "btn btnSubmit btn-secondary" id= "btnSubmit">Submit</button>
+            <button class= "btn btnReset btn-secondary" id= "btnReset">Reset Quiz</button>
+        </div>
+        <div id= 'highScorePage' style= 'display:none'>
+            <ol>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ol>
         </div>
     </main>
    
