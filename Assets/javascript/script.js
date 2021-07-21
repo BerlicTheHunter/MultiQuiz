@@ -92,7 +92,7 @@ function scoreTimer(){
           finalScore = secondsLeft;
           scoreTime.textContent = "Time: " + secondsLeft + " sec"
           clearInterval(timerInterval);
-          scoreInput();
+        //   scoreInput();
         }
       }, 1000);
 }
@@ -115,7 +115,9 @@ function cycleQuestion(){
 }
 // Function to check answers against correct answer
 function checkAnswer(event){
-    if(i > randomQuestion.length-1 || secondsLeft <= 0){
+    if(i > randomQuestion.length-1 || secondsLeft < 0){
+        finalScore = secondsLeft;
+        scoreInput();
         return;
     }
     else if (event.target.textContent == randomQuestion[i].rightAnswer){
@@ -144,22 +146,23 @@ function scoreInput(){
     highScoreWindow.style.display = "none"
     //Display final score on screen
     finalScoreEl.innerHTML = "Score:" + finalScore;
-    
-       // submit high score to local store
-     btnSubmit.addEventListener('click', function(){
-        
-        hiScoreList = JSON.parse(localStorage.getItem("highScore"));
-        hiScoreList.push({
-            name: nameInput.value,
-            score: finalScore
-        });      
-        console.log(hiScoreList);
-        localStorage.setItem("highScore", JSON.stringify(hiScoreList));    
-    })
 };
+// Function to submit high score to local store
+function submit(){
+    hiScoreList = JSON.parse(localStorage.getItem("highScore"));
+    hiScoreList.push({
+        name: nameInput.value,
+        score: finalScore,
+    });    
+    localStorage.setItem("highScore", JSON.stringify(hiScoreList));
+    quizReset();
+    return;    
+};
+
 // Function to Display High Score
 function showHighscore(){
-
+    hiScoreList = JSON.parse(localStorage.getItem("highScore"));
+    console.log(hiScoreList[0].value);
 }
 // Function to Reset Quiz To Start Screen
 function quizReset(){
@@ -175,14 +178,10 @@ function quizReset(){
     finalScore;
 }
 
-
-
-
-
-
 //...............Button Event Listeners...............//
 
 startBtn.addEventListener("click",startQuiz);
 highScoreBtn.addEventListener("click",showHighscore);
 btnList.addEventListener('click', checkAnswer)
 btnReset.addEventListener('click',quizReset)
+btnSubmit.addEventListener('click', submit);
