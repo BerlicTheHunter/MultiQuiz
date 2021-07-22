@@ -13,46 +13,58 @@
             <h1 class= 'px-4' style= 'color: white;' >Javascript Quiz</h1>
             <ul class="nav">
                 <li class="nav-item">
-                  <button id='highScoreBtn'>High Score</button>
+                  <button class= "mx-1 btn btnReset btn-secondary" id='highScoreBtn' style= 'display: block'>High Score</button>
                 </li>
-                <li class="nav-link active" id= 'scoreTime' style= 'color: white;'>
+                <li>
+                    <button class= "mx-1 btn btnReset btn-secondary"id= "btnReset">Reset Quiz</button>
+                </li>
+                <li class="mx-1 btn btn-info" id= 'scoreTime' style= 'color: white;'>
                   Time: 00 sec
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <div id= 'welcome'>
-            <h1>welcome</h1>
-            <button id= 'startBtn'>Start</button>
+        <div class = 'container' id= 'welcome'>
+            <h1>Welcome</h1>
+            <button class= "mx-1 btn btnReset btn-secondary" id= 'startBtn'>Start</button>
         </div>
-        <div id= 'quiz'style= 'display: none;'>
-            <h2 id= 'question'> 
-                Questions go here
-            </h2>
-            <ul id= 'btnList'>
-            <li><button class= 'btn btnAns btn-secondary' id= 'btn1'> Button 1 </button></li>
-            <li><button class= 'btn btnAns btn-secondary' id= 'btn2'> Button 2 </button></li>
-            <li><button class= 'btn btnAns btn-secondary' id= 'btn3'> Button 3 </button></li>
-            <li><button class= 'btn btnAns btn-secondary' id= 'btn4'> Button 4 </button></li>
-            </ul>
+        <div class= 'container' id= 'quiz'style= 'display: none;'>
+            <div class="row justify-content-around"> 
+                <h2 class='col-12 col-sm-8 text-center' id= 'question'> 
+                    Questions go here
+                </h2>
+                <div class='col-sm-8 row justify-content-around' id= 'btnList'>
+                <button class= 'col-12 col-sm-2 my-1 btn btnAns btn-secondary' id= 'btn1'> Button 1 </button>
+                <button class= 'col-12 col-sm-2 my-1 btn btnAns btn-secondary' id= 'btn2'> Button 2 </button>
+                <button class= 'col-12 col-sm-2 my-1 btn btnAns btn-secondary' id= 'btn3'> Button 3 </button>
+                <button class= 'col-12 col-sm-2 my-1 btn btnAns btn-secondary' id= 'btn4'> Button 4 </button>
+                </div>
+            </div>  
         </div>
-        <div id= 'scoreInput' style= 'display: none'>
-            <h2>Submit your Name and Score</h2>
-            <label for= "name">Name</label>
-            <input type= "text" id="name">
-            <p id= 'finalScore'>Final Score Here </p>
-            <button class= "btn btnSubmit btn-secondary" id= "btnSubmit">Submit</button>
-            <button class= "btn btnReset btn-secondary" id= "btnReset">Reset Quiz</button>
+        <div class= 'container'>
+            <div id= 'scoreInput' style= 'display: none'>
+                <h2>Submit your Name and Score</h2>
+                <label for= "name">Name</label>
+                <input type= "text" id="name">
+                <p id= 'finalScore'>Final Score Here </p>
+                <button class= "btn btnSubmit btn-secondary" id= "btnSubmit">Submit</button>
+                
+            </div>
         </div>
-        <div id= 'highScorePage' style= 'display:none'>
-            <ol>
-                <li id= "score1"></li>
-                <li id= "score2"></li>
-                <li id= "score3"></li>
-                <li id= "score4"></li>
-                <li id= "score5"></li>
-            </ol>
+        <div class='container' id= 'highScorePage' style= 'display:none'>
+            <table class ="table table-secondary table-striped table-bordered table-hover">
+                <thead>
+                    <tr class= "bg-info">
+                        <th>Rank</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody id='scoreTable'>
+                   
+                </tbody>
+            </table>
         </div>
     </main>
    

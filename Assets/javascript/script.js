@@ -19,6 +19,8 @@ var scoreTime = document.getElementById('scoreTime');
 var answerButtons = document.querySelectorAll('btnAns');
 var finalScoreEl = document.getElementById('finalScore');
 var nameInput = document.getElementById('name');
+var scoreTable = document.getElementById('scoreTable');
+
 // Set local storage variable
 var hiScoreList=[{
     name:"",
@@ -26,11 +28,13 @@ var hiScoreList=[{
     }
 ]; 
 localStorage.setItem("highScore", JSON.stringify(hiScoreList));
+
 // Set Universal variable and load states
 var i = 0;
 var startSec = 200;
 var timerInterval;
 var finalScore;
+
 // Set Questions and answers variable array
 var questionSet = [
     {
@@ -129,6 +133,9 @@ function checkAnswer(event){
         console.log('wrong');
         clearInterval(timerInterval);
         secondsLeft=secondsLeft - 100;
+        if (secondsLeft < 0){
+            secondsLeft = 0;
+        };
         i = i+1;
         scoreTimer();
         cycleQuestion();
@@ -151,18 +158,32 @@ function scoreInput(){
 function submit(){
     hiScoreList = JSON.parse(localStorage.getItem("highScore"));
     hiScoreList.push({
-        name: nameInput.value,
-        score: finalScore,
-    });    
+    name: nameInput.value,
+    score: finalScore,
+    });
+    hiScoreList.sort((a, b) => (a.score > b.score)? -1 : 1);
+    if (hiScoreList.length > 5)
+        hiScoreList.pop();
     localStorage.setItem("highScore", JSON.stringify(hiScoreList));
-    quizReset();
-    return;    
+    showHighscore();
+return;    
 };
 
 // Function to Display High Score
 function showHighscore(){
+    // Displays Highscore Page
+    welcomeWindow.style.display = 'none';
+    quizWindow.style.display = "none";
+    scoreInputWindow.style.display = "none";
+    highScoreWindow.style.display = "block"
+    highScoreBtn.style.display = "none";
+    // Populate Top 5 Highscores
     hiScoreList = JSON.parse(localStorage.getItem("highScore"));
-    console.log(hiScoreList[0].value);
+    scoreTable.innerHTML = '';
+    for (var j = 0; j < hiScoreList.length; j++){
+        var k = j+1;
+        scoreTable.innerHTML+= "<tr><td>"+ k +"</td><td>" + hiScoreList[j].name + "</td><td>" + hiScoreList[j].score + "</td></tr>" ;
+    };
 }
 // Function to Reset Quiz To Start Screen
 function quizReset(){
@@ -171,6 +192,7 @@ function quizReset(){
     quizWindow.style.display = "none";
     scoreInputWindow.style.display = "none";
     highScoreWindow.style.display = "none"
+    highScoreBtn.style.display = "block";
     // Reset Variables
     i = 0;
     secondsLeft = startSec;
