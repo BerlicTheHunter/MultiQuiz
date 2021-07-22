@@ -12,11 +12,20 @@ The MultiQuiz is a project assigned as part of the GTPE Coding bootcamp to devel
 * A highscore table
 
 ### Links
-[Password Generator](https://berlicthehunter.github.io/PasswordGen/)
+[MultiQuiz App](https://berlicthehunter.github.io/MultiQuiz/)
+
+[MultiQuiz GitHub](https://github.com/BerlicTheHunter/MultiQuiz)
 
 ### Language
-*HTML
-*CSS
-*Javascript
+* HTML
+* CSS via Bootstrap
+* Javascript
 
-### Main Page
+### Welcome Screen
+![](/Photos/MultiQuiz-Start.png)
+
+### Questions
+![](/Photos/MultiQuiz-Question.png)
+
+### High Score Table
+![](/Photos/MultiQuiz-HighScore.png)
