@@ -31,28 +31,38 @@ localStorage.setItem("highScore", JSON.stringify(hiScoreList));
 
 // Set Universal variable and load states
 var i = 0;
-var startSec = 200;
+var startSec = 1000;
 var timerInterval;
 var finalScore;
 
 // Set Questions and answers variable array
 var questionSet = [
     {
-        question: "Arrays in JS can be used to Store...",
-        answers: ['Strings','cats','Marshmellows','Websites'],
+        question: "Arrays in JS can be used to store which of the following?",
+        answers: ['Strings','Cats','Marshmellows','Hopes and Dreams'],
         rightAnswer: "Strings"
     },
     {
-        question: "Javascript is used to .... ",
-        answers: ['give function','add style','defend the universe','cats'],
-        rightAnswer: "give function"
+        question: "Javascript is linked to HTML in order to _______",
+        answers: ['Give Function','Add Style','Defend the Universe','Cats'],
+        rightAnswer: "Give Function"
     },    
     {
         question: "What notation is used to enclose code in a function() .... ",
-        answers: ['{}','[]','""','cats'],
+        answers: ['{}','[]','""','Cats'],
         rightAnswer: "{}"
-    }
-]
+    },
+    {
+        question: "Is JavaScript case-sensitive? ",
+        answers: ['Sometimes','No','Yes','Cats'],
+        rightAnswer: "Yes"
+    },
+    {
+        question: "What notation is used to add a comment in Javascript?",
+        answers: ['"---','//---','<!--->','<Catnap>'],
+        rightAnswer: "//---"
+    },  
+];
 
 
 // ...............Quiz Functions Section...............//
@@ -79,8 +89,6 @@ function startQuiz(){
     randomQuestion = questionSet.sort(()=>Math.random() - 0.5);
     i = 0;
     cycleQuestion(); 
-    //secondsLeft = 400;
-    console.log(i);   
 }
 //  Function to start the score timer
 function scoreTimer(){
@@ -96,7 +104,6 @@ function scoreTimer(){
           finalScore = secondsLeft;
           scoreTime.textContent = "Time: " + secondsLeft + " sec"
           clearInterval(timerInterval);
-        //   scoreInput();
         }
       }, 1000);
 }
@@ -119,7 +126,12 @@ function cycleQuestion(){
 }
 // Function to check answers against correct answer
 function checkAnswer(event){
-    if(i > randomQuestion.length-1 || secondsLeft < 0){
+    const isButton = event.target.nodeName === 'BUTTON';
+    console.log(isButton);
+    if(!isButton){
+        return;
+    }
+    else if(i > randomQuestion.length-1 || secondsLeft < 0){
         finalScore = secondsLeft;
         scoreInput();
         return;
@@ -152,19 +164,29 @@ function scoreInput(){
     scoreInputWindow.style.display = "block";
     highScoreWindow.style.display = "none"
     //Display final score on screen
-    finalScoreEl.innerHTML = "Score:" + finalScore;
+    finalScoreEl.innerHTML = "Score: " + finalScore;
 };
 // Function to submit high score to local store
 function submit(){
+    // Pull in current high score list
     hiScoreList = JSON.parse(localStorage.getItem("highScore"));
+    // Add in the current score
     hiScoreList.push({
     name: nameInput.value,
     score: finalScore,
     });
+    // Sort the high scores in decending order
     hiScoreList.sort((a, b) => (a.score > b.score)? -1 : 1);
-    if (hiScoreList.length > 5)
+    // Resize to top five scores and remove placeholder from startup 
+    if (hiScoreList.length > 5){
         hiScoreList.pop();
+    }
+    else if(hiScoreList[hiScoreList.length - 1].name == ""){
+        hiScoreList.pop();
+    };
+    // submit new high score object to local storage
     localStorage.setItem("highScore", JSON.stringify(hiScoreList));
+    // Display high score window
     showHighscore();
 return;    
 };
